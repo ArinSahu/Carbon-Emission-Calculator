@@ -74,7 +74,12 @@
     </form>
     <% } %> <% } %>
 
-    <br />Your Total Carbon Emission = 0 Kg CO2
+    <br />
+    <% if (typeof co2emission !== 'undefined') { %>
+      Carbon Emitted = <%= co2emission %> Kg CO2
+      <% } %>
+      <br>
+    Your Total Carbon Emission = <%= totalco2 %> Kg CO2
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
