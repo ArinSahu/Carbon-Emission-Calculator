@@ -18,7 +18,8 @@ const loginSchema= new mongoose.Schema({
         required:true
     },
     totalco2:{
-        type:Number
+        type:Number,
+        default:0
     }
 });
 

@@ -31,10 +31,11 @@
     </form>
 
     <% if (typeof vehicleType !== 'undefined') { %>
-    <% if (vehicleType == "car") { %>
+    <% if (vehicleType == "car" || vehicleType == "bike") { %>
     <form action="/calculate" method="post" class="container">
       <input type="hidden" name="user" value="<%= user %>" />
       <input type="hidden" name="fuelType" value="<%= fuelType %>" />
+      <input type="hidden" name="vehicleType" value="<%= vehicleType %>" />
       
       <%= fuelType %>
       <%= vehicleType %>
@@ -47,24 +48,12 @@
       <br /><br />
       <button type="submit">Submit</button>
     </form>
-    <% } %> <% if (vehicleType == "bike") { %> 
-    <form action="/calculate" method="post" class="container">
-      <input type="hidden" name="user" value="<%= user %>" />
-      <input type="hidden" name="fuelType" value="<%= fuelType %>" />
-      <%= vehicleType %>
-      <br /><br />
-      <input type="text" required class="distance" name="distance" placeholder=" " />
-      <label>Distance Travelled in Km</label>
-      <br /><br />
-      <input type="text" required class="mileage" name="mileage" placeholder=" " />
-      <label>Mileage in Km/100Litres</label>
-      <br /><br />
-      <button type="submit">Submit</button>
-    </form>
-    <% } %> <% if (vehicleType == "flight") { %> 
+    <% } %>
+     <% if (vehicleType == "flight") { %> 
     <form action="/calculate" method="post" class="container">
       <input type="hidden" name="user" value="<%= user %>" />
       <input type="hidden" name="fuelType" value="none" />
+      <input type="hidden" name="vehicleType" value="<%= vehicleType %>" />
       <%= vehicleType %>
       <br /><br />
       <input type="text" required class="distance" name="distance" placeholder=" " />
@@ -76,8 +65,9 @@
 
     <br />
     <% if (typeof co2emission !== 'undefined') { %>
-      Carbon Emitted = <%= co2emission %> Kg CO2
+      Carbon Emitted from <%=vehicleType %> = <%= co2emission %> Kg CO2
       <% } %>
+      <br>
       <br>
     Your Total Carbon Emission = <%= totalco2 %> Kg CO2
 

@@ -75,6 +75,8 @@ app.post("/calculate",async(req,res)=>{
     const user=req.body.user;
     const distance=req.body.distance;
     const fuelType=req.body.fuelType;
+    const vehicleType=req.body.vehicleType;
+    console.log(vehicleType);
     const mileage= fuelType === "none" ? "none" : req.body.mileage;
     const fuelConsumed=(distance/mileage);
     let co2emission=0;
@@ -97,7 +99,7 @@ app.post("/calculate",async(req,res)=>{
         userRecord.totalco2 = (userRecord.totalco2 || 0) + co2emission;
         await userRecord.save();
     }
-    res.render("home",{user:user,distance:distance,fuelType:fuelType,mileage:mileage,co2emission:co2emission,totalco2:userRecord.totalco2});
+    res.render("home",{user:user,distance:distance,vehicleType:vehicleType,fuelType:fuelType,mileage:mileage,co2emission:co2emission,totalco2:userRecord.totalco2});
     // console.log(distance);
     // console.log(mileage);
     // console.log(fuelType);
