@@ -1,11 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-</head>
-<body>
-    this is home page
-</body>
+    <link rel="stylesheet" href="homestyle.css" />
+  </head>
+  <body>
+    <form action="/type" method="post" class="container">
+      <input type="hidden" name="user" value="<%= user %>" />
+      <div class="vehicle_type">
+        <label for="vehicleType" class="login__label">Vehicle Type</label>
+        <select name="vehicleType" class="vehicleType" id="vehicleType" required>
+          <option value="" disabled selected>Select your vehicle type</option>
+          <option value="car">Car</option>
+          <option value="bike">Bike</option>
+          <option value="flight">Flight</option>
+        </select>
+      </div>
+      <div class="fuel_type" id="fuelTypeContainer">
+        <label for="fuelType" class="login__label">Fuel Type</label>
+        <select name="fuelType" class="fuelType" id="fuelType" required>
+          <option value="" disabled selected>Select your fuel type</option>
+          <option value="petrol">Petrol</option>
+          <option value="diesel">Diesel</option>
+          <option value="electric">Electric</option>
+        </select>
+      </div>
+      <button type="submit">Select</button>
+    </form>
+
+    <% if (typeof vehicleType !== 'undefined') { %>
+    <% if (vehicleType == "car") { %>
+    <form action="/calculate" method="post" class="container">
+      <input type="hidden" name="user" value="<%= user %>" />
+      <input type="hidden" name="fuelType" value="<%= fuelType %>" />
+      
+      <%= fuelType %>
+      <%= vehicleType %>
+      <br /><br />
+      <input type="text" required class="distance" name="distance" placeholder=" " />
+      <label>Distance Travelled in Km</label>
+      <br /><br />
+      <input type="text" required class="mileage" name="mileage" placeholder=" " />
+      <label>Mileage in Km/100Litres</label>
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <% } %> <% if (vehicleType == "bike") { %> 
+    <form action="/calculate" method="post" class="container">
+      <input type="hidden" name="user" value="<%= user %>" />
+      <input type="hidden" name="fuelType" value="<%= fuelType %>" />
+      <%= vehicleType %>
+      <br /><br />
+      <input type="text" required class="distance" name="distance" placeholder=" " />
+      <label>Distance Travelled in Km</label>
+      <br /><br />
+      <input type="text" required class="mileage" name="mileage" placeholder=" " />
+      <label>Mileage in Km/100Litres</label>
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <% } %> <% if (vehicleType == "flight") { %> 
+    <form action="/calculate" method="post" class="container">
+      <input type="hidden" name="user" value="<%= user %>" />
+      <input type="hidden" name="fuelType" value="none" />
+      <%= vehicleType %>
+      <br /><br />
+      <input type="text" required class="distance" name="distance" placeholder=" " />
+      <label>Distance Travelled in Km</label>
+      <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+    <% } %> <% } %>
+
+    <br />Your Total Carbon Emission = 0 Kg CO2
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const vehicleTypeSelect = document.getElementById("vehicleType");
+        const fuelTypeContainer = document.getElementById("fuelTypeContainer");
+        const fuelTypeSelect = document.getElementById("fuelType");
+
+        vehicleTypeSelect.addEventListener("change", function () {
+          const selectedVehicleType = this.value;
+          if (selectedVehicleType === "car" || selectedVehicleType === "bike") {
+            fuelTypeContainer.style.display = "block";
+            fuelTypeSelect.required = true;
+          } else {
+            fuelTypeContainer.style.display = "none";
+            fuelTypeSelect.required = false;
+          }
+        });
+
+        vehicleTypeSelect.dispatchEvent(new Event("change"));
+      });
+    </script>
+  </body>
 </html>
