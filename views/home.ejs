@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="homestyle.css" />
   </head>
   <body>
+    
     <form action="/type" method="post" class="container">
       <input type="hidden" name="user" value="<%= user %>" />
       <div class="vehicle_type">
@@ -65,12 +66,14 @@
 
     <br />
     <% if (typeof co2emission !== 'undefined') { %>
-      Carbon Emitted from <%=vehicleType %> = <%= co2emission %> Kg CO2
+      <b> Carbon Emitted from <%=vehicleType %> = <%= co2emission %> Kg CO2 </b>
       <% } %>
+      
       <br>
-      <br>
-    Your Total Carbon Emission = <%= totalco2 %> Kg CO2
-
+    <b>Your Total Carbon Emission =<%= totalco2 %> Kg CO2</b>
+    <br><br>
+    <b> Formula for caluclating carbon emission - <a href="https://connectedfleet.michelin.com/blog/calculate-co2-emissions/#:~:text=One%20litre%20of%20diesel%20creates,has%20emitted%20in%20a%20month.">https://connectedfleet.michelin.com/blog/calculate-co2-emissions/#:~:text=One%20litre%20of%20diesel%20creates,has%20emitted%20in%20a%20month.</a>
+      </b>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const vehicleTypeSelect = document.getElementById("vehicleType");

@@ -76,7 +76,7 @@ app.post("/calculate",async(req,res)=>{
     const distance=req.body.distance;
     const fuelType=req.body.fuelType;
     const vehicleType=req.body.vehicleType;
-    console.log(vehicleType);
+    //console.log(vehicleType);
     const mileage= fuelType === "none" ? "none" : req.body.mileage;
     const fuelConsumed=(distance/mileage);
     let co2emission=0;
@@ -108,5 +108,5 @@ app.post("/calculate",async(req,res)=>{
 })
 
 app.listen(port, () => {
-    console.log(`server running on port :${port}`);
+    console.log(`server run hora hai on port :${port}`);
 })
