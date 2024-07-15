@@ -81,7 +81,17 @@ app.post("/calculate",async(req,res)=>{
     const fuelConsumed=(distance/mileage);
     let co2emission=0;
     if(fuelType==="none"){
-        co2emission=distance*0.10*1.9;
+        if(distance<1500){
+            co2emission=distance*0.15*1.9;
+
+        }
+        else if(distance>=1500 && distance <=4000){
+            co2emission=distance*0.10*1.9;
+
+        }
+        else{
+            co2emission=distance*0.09*1.9;
+        }
     }   
     else{
         if(fuelType==="petrol"){

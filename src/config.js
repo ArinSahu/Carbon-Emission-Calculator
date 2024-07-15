@@ -5,7 +5,7 @@ const connect = mongoose.connect("mongodb://localhost:27017/CarbonDB");
 //     console.log("ho gaya db connect");
 // })
 // .catch(()=>{
-//     console.log("nai hua db connect madarchod");
+//     console.log("nai hua db connect");
 // })
 
 const loginSchema= new mongoose.Schema({
