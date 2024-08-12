@@ -28,7 +28,7 @@ const loginSchema= new mongoose.Schema({
         },
         fuelType: {
             type: String,
-            required: true
+            
         },
         distance: {
             type: Number,

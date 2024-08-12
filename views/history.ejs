@@ -4,12 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
+    <link rel="stylesheet" href="history-style.css" />
 </head>
 <body>
     <h1>User Profile: <%= user.name %></h1>
     <p>Total CO2 Emissions: <%= user.totalco2 %> kg CO2</p>
     <br>
     <h1>Your co2 usage History</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Vehicle Type</th>
+                <th>Fuel Type</th>
+                <th>Distance (km)</th>
+                <th>Mileage (km/100L)</th>
+                <th>CO2 Emission (kg CO2)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% user.history.forEach(function(entry) { %>
+                <tr>
+                    <td><%= entry.vehicleType %></td>
+                    <td><%= entry.fuelType %></td>
+                    <td><%= entry.distance %></td>
+                    <td><%= entry.mileage %></td>
+                    <td><%= entry.emission %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
     
     
     

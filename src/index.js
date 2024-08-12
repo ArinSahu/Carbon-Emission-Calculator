@@ -107,12 +107,12 @@ app.post("/calculate",async(req,res)=>{
         }
     }
     const userRecord = await users.findOne({ name: user });
-    console.log(co2emission);
+    // console.log(co2emission);
     if (userRecord) {
         userRecord.totalco2 = (userRecord.totalco2 || 0) + co2emission;
         userRecord.history.push({
             vehicleType: vehicleType,
-            fuelType: fuelType,
+            fuelType: fuelType !== "none" ? fuelType :"JetFuel",
             distance: distance,
             mileage: mileage !== "none" ? mileage : null,
             emission: co2emission
