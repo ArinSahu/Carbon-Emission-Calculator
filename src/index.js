@@ -124,6 +124,7 @@ app.post("/calculate",async(req,res)=>{
     // console.log(mileage);
     // console.log(fuelType);
     // console.log(co2emission);
+    
 
 })
 
