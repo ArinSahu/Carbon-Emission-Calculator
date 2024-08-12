@@ -64,15 +64,17 @@ app.post("/login", async (req, res) => {
 
 app.post("/type",async(req,res)=>{
     const user = req.body.user;
+    
     const userRecord = await users.findOne({ name: user });
     const vehicleType=req.body.vehicleType;
     const fuelType = vehicleType === "flight" ? "none" : req.body.fuelType;
     //console.log(fuelType);
-    res.render("home",{user:user,vehicleType:vehicleType,fuelType:fuelType,totalco2:userRecord.totalco2});
-})
+    res.render("home",{user:userRecord.name,vehicleType:vehicleType,fuelType:fuelType,totalco2:userRecord.totalco2});
+});
 
 app.post("/calculate",async(req,res)=>{
     const user=req.body.user;
+   
     const distance=req.body.distance;
     const fuelType=req.body.fuelType;
     const vehicleType=req.body.vehicleType;
@@ -105,17 +107,32 @@ app.post("/calculate",async(req,res)=>{
         }
     }
     const userRecord = await users.findOne({ name: user });
+    console.log(co2emission);
     if (userRecord) {
         userRecord.totalco2 = (userRecord.totalco2 || 0) + co2emission;
+        userRecord.history.push({
+            vehicleType: vehicleType,
+            fuelType: fuelType,
+            distance: distance,
+            mileage: mileage !== "none" ? mileage : null,
+            emission: co2emission
+        });
         await userRecord.save();
     }
-    res.render("home",{user:user,distance:distance,vehicleType:vehicleType,fuelType:fuelType,mileage:mileage,co2emission:co2emission,totalco2:userRecord.totalco2});
+    res.render("home",{user:userRecord.name,distance:distance,vehicleType:vehicleType,fuelType:fuelType,mileage:mileage,co2emission:co2emission,totalco2:userRecord.totalco2});
     // console.log(distance);
     // console.log(mileage);
     // console.log(fuelType);
     // console.log(co2emission);
 
 })
+
+app.post("/history",async(req,res)=>{
+    const user=req.body.user;
+    const userRecord = await users.findOne({ name: user });
+    // console.log(user);
+    res.render("history",{user:userRecord});
+});
 
 app.listen(port, () => {
     console.log(`server run hora hai on port :${port}`);

@@ -72,8 +72,10 @@
       <br>
     <b>Your Total Carbon Emission =<%= totalco2 %> Kg CO2</b>
     <br><br>
-    <b> Formula for caluclating carbon emission - <a href="https://connectedfleet.michelin.com/blog/calculate-co2-emissions/#:~:text=One%20litre%20of%20diesel%20creates,has%20emitted%20in%20a%20month.">Car,Bike</a>, <a href="https://flyetic.com/en/sustainability/carbon-calculator">Flight</a>
-      </b>
+      <form action="/history" method="post">
+        <input type="hidden" name="user" value="<%= user %>" />
+        <button type="submit">Your Carbon Emssions</button>
+      </form>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const vehicleTypeSelect = document.getElementById("vehicleType");

@@ -20,7 +20,31 @@ const loginSchema= new mongoose.Schema({
     totalco2:{
         type:Number,
         default:0
-    }
+    },
+    history:[{
+        vehicleType: {
+            type: String,
+            required: true
+        },
+        fuelType: {
+            type: String,
+            required: true
+        },
+        distance: {
+            type: Number,
+            default:0
+        },
+        mileage: {
+            type: Number,
+            default:0
+        },
+        emission:{
+            type:Number,
+            required:true,
+            default:0
+        }
+    }]
+   
 });
 
 const users= new mongoose.model("users",loginSchema);
